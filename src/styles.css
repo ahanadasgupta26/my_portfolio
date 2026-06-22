@@ -1,0 +1,118 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 14px;
+  --radius-xl: 22px;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-glow: var(--glow);
+  --color-lime: var(--lime);
+}
+
+:root {
+  --background: oklch(0.18 0.02 250);
+  --foreground: oklch(0.96 0.01 95);
+  --surface: oklch(0.22 0.025 250);
+  --surface-2: oklch(0.26 0.03 250);
+  --card: oklch(0.22 0.025 250);
+  --card-foreground: oklch(0.96 0.01 95);
+  --popover: oklch(0.22 0.025 250);
+  --popover-foreground: oklch(0.96 0.01 95);
+  --primary: oklch(0.82 0.18 195);
+  --primary-foreground: oklch(0.18 0.02 250);
+  --secondary: oklch(0.3 0.04 250);
+  --secondary-foreground: oklch(0.96 0.01 95);
+  --muted: oklch(0.28 0.03 250);
+  --muted-foreground: oklch(0.72 0.02 250);
+  --accent: oklch(0.88 0.2 130);
+  --accent-foreground: oklch(0.18 0.02 250);
+  --destructive: oklch(0.65 0.22 25);
+  --destructive-foreground: oklch(0.96 0.01 95);
+  --border: oklch(0.32 0.02 250);
+  --input: oklch(0.3 0.02 250);
+  --ring: oklch(0.82 0.18 195);
+  --glow: oklch(0.82 0.18 195 / 0.35);
+  --lime: oklch(0.88 0.2 130);
+  --radius: 14px;
+}
+
+@layer base {
+  * { border-color: var(--color-border); }
+  html { scroll-behavior: smooth; }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    background-image:
+      radial-gradient(ellipse 80% 50% at 20% 0%, oklch(0.82 0.18 195 / 0.08), transparent 60%),
+      radial-gradient(ellipse 60% 40% at 90% 30%, oklch(0.88 0.2 130 / 0.06), transparent 60%);
+    background-attachment: fixed;
+  }
+  h1, h2, h3, h4 { font-family: var(--font-display); letter-spacing: -0.02em; }
+  ::selection { background: var(--color-primary); color: var(--color-primary-foreground); }
+}
+
+@layer utilities {
+  .font-display { font-family: var(--font-display); }
+  .font-mono { font-family: var(--font-mono); }
+  .grid-bg {
+    background-image:
+      linear-gradient(to right, oklch(1 0 0 / 0.04) 1px, transparent 1px),
+      linear-gradient(to bottom, oklch(1 0 0 / 0.04) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+  .text-gradient {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-lime) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .glow-ring {
+    box-shadow: 0 0 0 1px var(--color-border), 0 20px 60px -20px var(--color-glow);
+  }
+  .hover-lift {
+    transition: transform 300ms cubic-bezier(0.2, 0.8, 0.2, 1), border-color 300ms, box-shadow 300ms;
+  }
+  .hover-lift:hover {
+    transform: translateY(-4px);
+    border-color: var(--color-primary);
+    box-shadow: 0 24px 60px -30px var(--color-glow);
+  }
+  @keyframes blink { 0%, 50% { opacity: 1 } 50.01%, 100% { opacity: 0 } }
+  .cursor-blink::after {
+    content: "_"; margin-left: 2px; animation: blink 1s steps(1) infinite;
+    color: var(--color-primary);
+  }
+  @keyframes float-slow { 0%, 100% { transform: translateY(0) } 50% { transform: translateY(-12px) } }
+  .float-slow { animation: float-slow 6s ease-in-out infinite; }
+}
